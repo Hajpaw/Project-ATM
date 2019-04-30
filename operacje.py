@@ -1,6 +1,27 @@
 #!/usr/bin/python3
 
+
+#data_bb = open("./db.txt","r")
+
 baza_uzytk = {}
+
+def db_update():
+	#data_base = open("./db.txt","w")
+	#data_base.write(baza_uzytk)
+	#data_base.close()
+
+	data_bb = open("./db.txt","r")
+	for line in data_bb:
+		x = line.split(",")
+		a = x[0]
+		b = x[1]
+		c = x[2]
+		e = len(c) - 1
+		c = c[0:e]
+		baza_uzytk[a] = [int(b),int(c)]
+	data_bb.close()
+
+db_update()
 
 class User:
 	def __init__(self,imie,pin,stan_konta):
@@ -9,14 +30,18 @@ class User:
 		self.stan_konta = stan_konta
 
 	def add_user(imie):
-		tmp = []
-		#tmp.append(input("Podaj imię nowego użytkownika: "))
-		tmp.append(int(input("\nPodaj PIN nowego użytkownika: ")))
-		tmp.append(int(input("\nPodaj stan konta nowego użytkownika: ")))
+		data_b = open("./db.txt","a+")
+		pin = (input("\nPodaj PIN nowego użytkownika: "))
+		stan_k = (input("\nPodaj stan konta nowego użytkownika: "))
 		print('\n')
-		baza_uzytk[imie] = tmp
-		print(imie,'\n',tmp)
-		return baza_uzytk
+		data_b.write(imie)
+		data_b.write(",")
+		data_b.write(pin)
+		data_b.write(",")
+		data_b.write(stan_k + "\n")
+		data_b.close()
+		db_update()
+
 	def check_db():
 		print(baza_uzytk)
 
@@ -26,25 +51,22 @@ class Operacja:
 		self.karta = karta
 
 	def wyplata(ilosc,kto):
-		if baza_uzytk[kto][1] >= ilosc:
-			baza_uzytk[kto][1] = baza_uzytk[kto][1] - ilosc
+		if int(baza_uzytk[kto][1]) >= ilosc:
+			(baza_uzytk[kto][1]) = (baza_uzytk[kto][1]) - ilosc
+			print(f"Wypłacono {ilosc} zł.\n")
 			return baza_uzytk
 		else:
 			print("Nie masz wystarczających środków na koncie")
 
 	def sprawdzenie(kto):
-		print(f'Stan konta {kto} wynosi: ')
-		print(baza_uzytk[kto][1])
+		print(f'Stan konta {kto} wynosi: {baza_uzytk[kto][1]} zł')
 
 	def darowizna(ilosc,kto,akcja):
-		if baza_uzytk[kto][1] >= ilosc:
-			baza_uzytk[kto][1] = baza_uzytk[kto][1] - ilosc
+		if int(baza_uzytk[kto][1]) >= ilosc:
+			(baza_uzytk[kto][1]) = (baza_uzytk[kto][1]) - ilosc
 			print(f'Dziękujemy za przekazanie pieniędzy na rzecz {akcja}')
 			return baza_uzytk
 		
 		else:
 			print("Nie masz wystarczających środków na koncie")
 
-#User.add_user('Wojtek')
-
-#print(baza_uzytk)

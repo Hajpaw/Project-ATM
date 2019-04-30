@@ -45,35 +45,37 @@ elif len(admin) == 1:
 			print("Proszę włożyć kartę")
 			time.sleep(4)
 			kim_jestes_k = input("Podaj swoje imię\n: ")
-			#sprawdzenie czy imie znajduje sie w bazie - to do
-			check_pin = int(input("Wprowadź kod PIN\n: "))
-			if check_pin == operacje.baza_uzytk[kim_jestes_k][0]:
-				co_dalej = input("Wybierz co chcesz dalej zrobić:\nSprawdzić stan konta - wciśnij *S*\nPrzekazać darowiznę - wciśnij *D*\nWypłacić - wciśnij *W*\nPowrócić do poprzedniego ekranu - wciśnij *B*\nWyjść - wciśnij *Q*\n:")
-				if co_dalej.lower() == 's':
-					operacje.Operacja.sprawdzenie(kim_jestes_k)
+			if kim_jestes_k in operacje.baza_uzytk.keys():
+				check_pin = int(input("Wprowadź kod PIN\n: "))
+				if check_pin == int(operacje.baza_uzytk[kim_jestes_k][0]):
+					co_dalej = input("Wybierz co chcesz dalej zrobić:\nSprawdzić stan konta - wciśnij *S*\nPrzekazać darowiznę - wciśnij *D*\nWypłacić - wciśnij *W*\nPowrócić do poprzedniego ekranu - wciśnij *B*\nWyjść - wciśnij *Q*\n:")
+					if co_dalej.lower() == 's':
+						operacje.Operacja.sprawdzenie(kim_jestes_k)
 
-				elif co_dalej.lower() == 'q':
-					break
+					elif co_dalej.lower() == 'q':
+						break
 
-				elif co_dalej.lower() == 'b':
-					continue
+					elif co_dalej.lower() == 'b':
+						continue
 
-				elif co_dalej.lower() == 'w':
-					no_ile = int(input("Podaj kwotę, którą chcesz wypłacić\n: "))
-					if no_ile%10==0:
-						operacje.Operacja.wyplata(no_ile,kim_jestes_k)
-						print(f"Wypłacono {no_ile}zł.\n")
+					elif co_dalej.lower() == 'w':
+						no_ile = int(input("Podaj kwotę, którą chcesz wypłacić\n: "))
+						if no_ile%10==0:
+							operacje.Operacja.wyplata(no_ile,kim_jestes_k)
 
-					else:
-						print('Źle wprowadzona kwota. Pamiętaj, że wypłacać możesz tylko kwoty zaokrąglone do dziesiątek.')
+						else:
+							print('Źle wprowadzona kwota. Pamiętaj, że wypłacać możesz tylko kwoty zaokrąglone do dziesiątek.')
 
-				elif co_dalej.lower() == 'd':
-					jaka_akcja = input("Wpisz nazwę akcji, na którą chcesz przekazać datek\nDamian\nSzlachetnaPaczka,\nWOŚP\nGreenpeace\n: ")
-					no_ile_d = int(input(f"Podaj kwotę, którą chcesz przeznaczyć na {jaka_akcja}"))
-					operacje.Operacja.darowizna(no_ile_d,kim_jestes_k,jaka_akcja)
+					elif co_dalej.lower() == 'd':
+						jaka_akcja = input("Wpisz nazwę akcji, na którą chcesz przekazać datek\nDamian\nSzlachetnaPaczka,\nWOŚP\nGreenpeace\n: ")
+						no_ile_d = int(input(f"Podaj kwotę, którą chcesz przeznaczyć na {jaka_akcja}\n: "))
+						operacje.Operacja.darowizna(no_ile_d,kim_jestes_k,jaka_akcja)
+
+				else:
+					print("Wprowadzono błędny kod PIN")
 
 			else:
-				print("Wprowadzono błędny kod PIN")
+				print("Użytkownik nie znajduje się w bazie")
 
 		elif rodzaj_trans.lower() == 'bk':
 			print("Proszę zbliżyć kartę")
