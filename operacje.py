@@ -32,7 +32,8 @@ class User:
 		data_b.write(",")
 		data_b.write(pin)
 		data_b.write(",")
-		data_b.write(stan_k + "\n")
+		data_b.write(stan_k)
+		data_b.write("|")
 		data_b.close()
 		db_update()
 

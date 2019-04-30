@@ -83,7 +83,7 @@ elif len(admin) == 1:
 			kim_jestes = input("Podaj swoje imię\n: ")
 			time.sleep(1)
 			ile_bk = int(input("Jaką ilość chcesz wypłacić?\n50\n40\n20\n: "))
-			if ile_bk is int and kim_jestes is string:
+			if kim_jestes in operacje.baza_uzytk.keys() and ile_bk in [20,40,50]:
 				operacje.Operacja.wyplata(ile_bk,kim_jestes)
 
 			else:
