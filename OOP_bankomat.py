@@ -46,7 +46,7 @@ elif len(admin) == 1:
 			time.sleep(4)
 			kim_jestes_k = input("Podaj swoje imię\n: ")
 			if kim_jestes_k in operacje.baza_uzytk.keys():
-				check_pin = int(input("Wprowadź kod PIN\n: "))
+				check_pin = int(getpass("Wprowadź kod PIN\n: "))
 				if check_pin == int(operacje.baza_uzytk[kim_jestes_k][0]):
 					co_dalej = input("Wybierz co chcesz dalej zrobić:\nSprawdzić stan konta - wciśnij *S*\nPrzekazać darowiznę - wciśnij *D*\nWypłacić - wciśnij *W*\nPowrócić do poprzedniego ekranu - wciśnij *B*\nWyjść - wciśnij *Q*\n:")
 					if co_dalej.lower() == 's':

@@ -1,14 +1,8 @@
 #!/usr/bin/python3
 
-
-#data_bb = open("./db.txt","r")
-
 baza_uzytk = {}
 
 def db_update():
-	#data_base = open("./db.txt","w")
-	#data_base.write(baza_uzytk)
-	#data_base.close()
 
 	data_bb = open("./db.txt","r")
 	for line in data_bb:
