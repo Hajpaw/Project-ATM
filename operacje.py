@@ -10,10 +10,10 @@ def db_update():
 		a = x[0]
 		b = x[1]
 		c = x[2]
-		e = len(c) - 1
-		c = c[0:e]
+		#e = len(c) - 1
+		#c = c[0:e]
 		baza_uzytk[a] = [int(b),int(c)]
-	data_bb.close()
+	data_bb.close()		
 
 db_update()
 
@@ -33,7 +33,7 @@ class User:
 		data_b.write(pin)
 		data_b.write(",")
 		data_b.write(stan_k)
-		data_b.write("|")
+		data_b.write("\n")
 		data_b.close()
 		db_update()
 
